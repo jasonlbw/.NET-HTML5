@@ -1,0 +1,501 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>矩形</title>
+    <link rel="shortcut icon" href="http://www.jiuxian.com/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="http://www.jiuxian.com/favicon.ico" type="image/x-icon" />
+    <script type="text/javascript">
+        function draw21(id) {
+            var canvas = document.getElementById(id)
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            //实践表明在不设施fillStyle下的默认fillStyle=black
+            context.fillRect(0, 0, 100, 100);
+            //实践表明在不设施strokeStyle下的默认strokeStyle=black
+            context.strokeRect(120, 0, 100, 100);
+
+            //设置纯色
+            context.fillStyle = "red";
+            context.strokeStyle = "blue";
+            context.fillRect(0, 120, 100, 100);
+            context.strokeRect(120, 120, 100, 100);
+
+            //设置透明度实践证明透明度值>0,<1值越低，越透明，值>=1时为纯色，值<=0时为完全透明
+            context.fillStyle = "rgba(255,0,0,0.2)";
+            context.strokeStyle = "rgba(255,0,0,0.2)";
+            context.fillRect(240, 0, 100, 100);
+            context.strokeRect(240, 120, 100, 100);
+
+            context.clearRect(50, 50, 240, 120);
+        }
+
+        function draw17(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return null;
+            var context = canvas.getContext('2d');
+            context.fillStyle = "#EEEFFF";
+            context.fillRect(0, 0, 400, 300);
+            context.strokeStyle = "red";
+            context.strokeRect(400, 0, 100, 300);
+            context.fillStyle = "#00f";
+            context.font = "italic 30px sans-serif";
+            context.textBaseline = "top";
+
+            var txt = "fill示例文字";
+            context.fillText(txt, 0, 0);
+            var length = context.measureText(txt);
+            context.fillText("长" + length.width + "px", 0, 50);
+
+            txt = "sroke示例文字";
+            length = context.measureText(txt);
+            context.strokeText(txt, 0, 100);
+            context.fillText("长" + length.width + "px", 0, 150);
+        }
+
+        function draw8(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return;
+            var context = canvas.getContext('2d');
+
+            context.strokeStyle = "rgb(250,0,0)";
+            //实验证明第一次lineTo的时候和moveTo功能一样
+            context.lineTo(100, 100);
+            context.lineTo(200, 200);
+            //之后的lineTo会以上次lineTo的节点为开始
+            context.lineTo(200, 100);
+
+            context.moveTo(200, 50);
+            context.lineTo(100, 50);
+
+            context.stroke();
+        }
+
+        function draw25(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            var g1 = context.createLinearGradient(0, 0, 0, 300);
+            //侧重理解第一个参数偏移量
+            g1.addColorStop(0.1, 'rgb(255,0,0)');//红
+            g1.addColorStop(0.3, 'rgb(255,255,255)');//白
+            g1.addColorStop(0.5, 'rgb(0,255,0)');//绿
+            g1.addColorStop(0.7, 'rgb(0,0,0)');//黑
+            g1.addColorStop(1, 'rgb(0,0,255');//蓝
+
+            //可以把g1对象理解为GDI中线性brush
+            context.fillStyle = g1;
+            //再用这个brush来画矩形
+            context.fillRect(0, 0, 200, 300);
+        }
+
+        function draw26(id) {
+            /*//同一个圆心画球型
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            var g1 = context.createRadialGradient(200, 150, 0, 200, 150, 100);
+            g1.addColorStop(0.1, 'rgb(255,0,0)');
+            g1.addColorStop(1, 'rgb(50,0,0)');
+            context.fillStyle = g1;
+            context.beginPath();
+            context.arc(200, 150, 100, 0, Math.PI * 2, true);
+            context.closePath();
+            context.fill();
+
+
+            //不同圆心看径向渐变模型
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            var g1 = context.createRadialGradient(100, 150, 10, 300, 150, 50);
+            g1.addColorStop(0.1, 'rgb(255,0,0)');
+            g1.addColorStop(0.5, 'rgb(0,255,0)');
+            g1.addColorStop(1, 'rgb(0,0,255)');
+            context.fillStyle = g1;
+            context.fillRect(0, 0, 400, 300);*/
+
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            var g1 = context.createRadialGradient(100, 150, 10, 300, 150, 50);
+            g1.addColorStop(0.1, 'rgb(255,0,0)');
+            g1.addColorStop(0.5, 'rgb(0,255,0)');
+            g1.addColorStop(1, 'rgb(0,0,255)');
+            context.fillStyle = g1;
+            context.fillRect(0, 0, 400, 300);
+
+        }
+
+        function draw5(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+
+
+            var context = canvas.getContext("2d");
+            context.save(); //保存了当前context的状态
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+
+            context.fillStyle = "rgba(255,0,0,0.1)";
+            context.translate(100, 100);//平移
+            context.scale(0.5, 0.5);//缩放
+            context.rotate(Math.PI / 4);//旋转
+            context.fillRect(0, 0, 100, 100);
+
+
+            context.restore(); //恢复到刚刚保存的状态,保存恢复只能使用一次
+            context.save(); //保存了当前context的状态
+            context.fillStyle = "rgba(255,0,0,0.2)";
+            context.translate(100, 100);//平移
+            context.rotate(Math.PI / 4);//旋转
+            context.scale(0.5, 0.5);//缩放
+            context.fillRect(0, 0, 100, 100);
+
+            context.restore(); //恢复到刚刚保存的状态
+            context.save(); //保存了当前context的状态
+            context.fillStyle = "rgba(255,0,0,0.3)";
+            context.scale(0.3, 0.3);//缩放
+            context.translate(100, 100);//平移（缩放之后的平移坐标也随之为：0.3*100，0.3*100）
+            context.rotate(Math.PI / 4);//旋转
+            context.fillRect(0, 0, 100, 100);
+
+            context.restore(); //恢复到刚刚保存的状态
+            context.save(); //保存了当前context的状态
+            context.fillStyle = "rgba(255,0,0,0.4)";
+            context.scale(0.5, 0.5);//缩放            
+            context.rotate(Math.PI / 4);//旋转
+            //context.fillRect(0, 0, 100, 100);
+            context.translate(100, 100);//平移
+            context.fillRect(0, 0, 100, 100);
+
+            context.restore(); //恢复到刚刚保存的状态
+            context.save(); //保存了当前context的状态
+            context.fillStyle = "rgba(255,0,0,0.5)";
+            context.rotate(Math.PI / 4);//旋转
+            context.translate(100, 100);//平移
+            context.scale(0.5, 0.5);//缩放
+            context.fillRect(0, 0, 100, 100);
+
+            context.restore(); //恢复到刚刚保存的状态
+            context.save(); //保存了当前context的状态
+            context.fillStyle = "rgba(255,0,0,1)";
+            context.rotate(Math.PI / 4);//旋转
+            context.scale(0.3, 0.3);//缩放
+            context.translate(100, 100);//平移
+            context.fillRect(0, 0, 100, 100);
+
+            //实验表明移动的是坐标轴
+            //实验表明缩放的是坐标轴比例
+            //实验表明旋转的是坐标轴
+            //综合上述，因此平移 缩放 旋转 三者的顺序不同都将画出不同的结果
+        }
+
+        function draw10(id) {
+            /*var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext("2d");
+            var oprtns = new Array(
+            "source-over",
+            "destination-over",
+            "source-in",
+            "destination-in",
+            "source-out",
+            "destination-out",
+            "source-atop",
+            "destination-atop",
+            "lighter",
+            "xor",
+            "copy"
+            );
+            var i = 0;//组合效果编号
+
+            //结合setinterval动态显示组合
+            var interal = setInterval(function () {
+                if (i == 10) {
+                    i = 0;
+                }
+                else {
+                    i++;
+                }
+                //蓝色矩形
+                context.fillStyle = "blue";
+                context.fillRect(10, 10, 60, 60);
+                //设置组合方式 
+                context.globalCompositeOperation = oprtns[i];
+                //设置新图形（红色圆形）
+                context.beginPath();
+                context.fillStyle = "red";
+                context.arc(60, 60, 30, 0, Math.PI * 2, false);
+                context.fill();
+            }, 1000);*/
+
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            var oprtns = new Array("source-over", "destination-over", "source-in", "destination-in", "source-out",
+            "destination-out", "source-atop", "destination-atop", "lighter", "xor", "copy");
+
+            var i = 0;
+            var interval = setInterval(function () {
+                debugger;
+                if (i == 10) {
+                    i = 0;
+                } else { i++; }
+
+                context.fillStyle = "blue";
+                context.fillRect(10, 10, 60, 60);
+                context.globalCompositeOperation = oprtns[i];
+                context.beginPath();
+                context.fillStyle = "red";
+                context.arc(60, 60, 30, 0, Math.PI * 2, false);
+                context.fill();
+            }, 1000);
+
+        }
+
+        function draw27(id) {
+            /*var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            context.shadowOffsetX = 10;
+            context.shadowOffsetY = 10;
+            context.shadowColor = 'rgba(100,100,100,0.5)';
+            context.shadowBlur = 0.5;
+            context.fillStyle = 'rgba(255,0,0,0.5)';
+            context.fillRect(100, 100, 200, 100);*/
+
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            context.shadowOffsetX = 10;//阴影横向位移量（默认为0）
+            //context.shadowOffsetY = 10;//阴影纵向位移量（默认为0）
+            context.shadowColor = 'rgba(100,100,100,0.5)';//阴影颜色
+            context.shadowBlur = 0.5;//模糊程度，值越大越模糊
+
+            context.fillStyle = 'rgba(255,0,0,0.5)';
+            context.fillRect(100, 100, 200, 100);
+        }
+
+        function create5Star(context) {
+            var n = 0;
+            var dx = 100;
+            var dy = 0;
+
+            var s = 50;
+            //创建路径
+            context.beginPath();
+            context.fillStyle = 'rgba(255,0,0,0.5)';
+            var x = Math.sin(0);
+            var y = Math.cos(0);
+            var dig = Math.PI / 5 * 4;
+            for (var i = 0; i < 5; i++) {
+                var x = Math.sin(i * dig);
+                var y = Math.cos(i * dig);
+                context.lineTo(dx + x * s, dy + y * s);
+
+            }
+            context.closePath();
+
+        }
+
+        function draw11(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+
+            context.shadowOffsetX = 10;
+            context.shadowOffsetY = 10;
+            context.shadowColor = 'rgba(100,100,100,0.5)';
+            context.shadowBlur = 5;
+            //图形绘制
+            context.translate(0, 50);//平移
+            for (var i = 0; i < 3; i++) {
+                context.translate(50, 50);
+                create5Star(context);
+                context.fill();
+            }
+        }
+
+
+        //drawImage(image,x,y)
+        function draw28(id) {
+
+            var image = new Image();
+
+            image.src = "../Content/Image/html5.jpg";
+            var canvas = document.getElementById(id);
+
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "pink";
+
+            context.fillRect(0, 0, 600, 600);
+            image.onload = function () {
+                context.drawImage(image, 10, 10);
+            }
+        }
+
+        //drawImage(image,x,y,w,h)
+        function draw12(id) {
+
+            var image = new Image();
+
+            image.src = "../Content/Image/html5.jpg";
+            var canvas = document.getElementById(id);
+
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "#EEEEFF";
+
+            context.fillRect(0, 0, 500, 300);
+            image.onload = function () {
+                context.drawImage(image, 50, 50, 200, 200);
+            }
+        }
+
+        //drawImage(image,sx,sy,sw,sh,dx,dy,dw,dh)
+        //图片，图片X坐标，图片Y坐标，图片上矩形宽度，图片上矩形高度，canvas的X坐标，canvas的Y坐标，指定宽度，指定高度（最后两个宽高实际上是缩放）
+        function draw13(id) {
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+            var canvas = document.getElementById(id);
+
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "#EEEEFF";
+
+            context.fillRect(0, 0, 400, 300);
+            image.onload = function () {
+                context.drawImage(image, 100, 100, 300, 300, 100, 100, 100, 100);//这里取的是实际尺寸
+            }
+        }
+
+        function draw14(id) {
+            //传统的平铺是用for循环来处理的，现在直接调用接口
+            var image = new Image();
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            var type = ["no-repeat", "repeat-x", "repeat-y", "repeat"];
+            var i = 0;
+            image.src = "../Content/Image/anta.png";
+            image.onload = function () {
+                var interval = setInterval(function () {
+                    //每次转换平铺类型清空
+                    context.clearRect(0, 0, 400, 300);
+                    if (i >= 4) {
+                        i = 0;
+                    }
+                    var ptrn = context.createPattern(image, type[i]);
+                    context.fillStyle = ptrn;
+                    context.fillRect(0, 0, 200, 150);
+                    i++;
+                }, 1000);
+            };
+        }
+
+
+        //图像裁剪
+        function draw15(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "pink";
+            context.fillRect(0, 0, 400, 400);
+            image = new Image();
+            image.onload = function () {
+                drawImg(context, image);
+            }
+            image.src = "../Content/Image/html5.jpg"
+        }
+
+        function drawImg(context, image) {
+            //圆形裁剪区
+            //createCircleClip(context)
+            //星形裁剪区
+            create5StarClip(context);
+            context.drawImage(image, 0, 0);
+        }
+
+        function createCircleClip(context) {
+            context.beginPath();
+            context.arc(200, 150, 100, 0, Math.PI * 2, true);
+            context.closePath();
+            context.clip();
+        }
+
+        function create5StarClip(context) {
+            debugger;
+            var n = 0;
+            var dx = 200;
+            var dy = 135;
+            var s = 150;
+            context.beginPath();
+            var x = Math.sin(0);
+            var y = Math.cos(0);
+            var dig = Math.PI / 5 * 4;
+            for (var i = 0; i < 5; i++) {
+                var x = Math.sin(i * dig);
+                var y = Math.cos(i * dig);
+                context.lineTo(dx + x * s, dy + y * s);
+            }
+            context.closePath();
+            context.clip();
+        }
+    </script>
+</head>
+<body>
+    <canvas id="demo1" width="500" height="300"></canvas>
+    <canvas id="demo2" width="500" height="300"></canvas>
+    <canvas id="demo3" width="500" height="300"></canvas>
+    <canvas id="demo4" width="500" height="300"></canvas>
+    <canvas id="demo5" width="500" height="300"></canvas>
+    <canvas id="demo6" width="500" height="300"></canvas>
+    <canvas id="demo7" width="500" height="300"></canvas>
+    <canvas id="demo8" width="500" height="300"></canvas>
+    <canvas id="demo9" width="500" height="300"></canvas>
+    <canvas id="demo10" width="600" height="600"></canvas>
+    <canvas id="demo11" width="500" height="300"></canvas>
+    <canvas id="demo12" width="500" height="300"></canvas>
+    <canvas id="demo13" width="500" height="300"></canvas>
+    <canvas id="demo14" width="400" height="400"></canvas>
+
+    <div style="height: 100px;"></div>
+    <input type="button" value="button1" onclick="draw21('demo1');" />
+    <input type="button" value="button2" onclick="draw17('demo2');" />
+    <input type="button" value="button3" onclick="draw8('demo3');" />
+    <input type="button" value="线性颜色渐变" onclick="draw25('demo4');" />
+    <input type="button" value="径向渐变（发散）" onclick="draw26('demo5');" />
+    <input type="button" value="移动缩放旋转" onclick="draw5('demo6');" />
+    <input type="button" value="图形组合" onclick="draw10('demo7');" />
+    <input type="button" value="绘制阴影" onclick="draw27('demo8');" />
+    <input type="button" value="五角星阴影" onclick="draw11('demo9');" />
+    <input type="button" value="绘制图像1" onclick="draw28('demo10');" />
+    <input type="button" value="绘制图像2" onclick="draw12('demo11');" />
+    <input type="button" value="绘制图像3" onclick="draw13('demo12');" />
+    <input type="button" value="图像平铺" onclick="draw14('demo13');" />
+    <input type="button" value="图像裁剪" onclick="draw15('demo14');" />
+</body>
+</html>

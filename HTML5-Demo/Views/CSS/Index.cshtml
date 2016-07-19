@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>CSS示例</title>
+    <link rel="shortcut icon" href="http://www.jiuxian.com/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="http://www.jiuxian.com/favicon.ico" type="image/x-icon" />
+    <style type="text/css">
+        .container {width:50%;height:50px;border:gray 1px solid;margin:20px auto;padding-left:15px;padding-right:15px;}
+        .row {background-color:pink;height:30px;margin-right:-15px;margin-left:-15px;width:50%;right:10%;float:left;position:relative;}
+
+        kbd {padding:2px 4px;font-size:90%;color:#fff;background-color:#333;border-radius:3px;box-shadow:0 -1px 0 pink inset;}
+    </style>
+
+    <script type="text/javascript">
+        // alert插件类及原型方法的定义
+        // 定义选择器,所有符合该自定义属性的元素都可以触发下面的事件
+        var dismiss = '[data-dismiss="alert"]'
+        var Alert = function (el) {
+            // 传入元素,如果元素内部有dismiss上设置的自定义属性,则click事件会触发原型上的close方法
+            $(el).on('click', dismiss, this.close)
+        }
+        Alert.prototype.close = function (e) {
+            // 关闭警告框的主要代码设置,每一行代码的细节注释,请参考5.8节
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row"></div>
+    </div>
+
+    要对<kbd>&lt;body&gt; &lt;/body&gt;</kbd>进行设置
+
+</body>
+</html>

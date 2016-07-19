@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>3.4表格</title>
+    <link rel="shortcut icon" href="http://www.jiuxian.com/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="http://www.jiuxian.com/favicon.ico" type="image/x-icon" />
+    <style type="text/css">
+        table {
+            max-width: 100%;
+            background-color: transparent;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /*设置基本样式*/
+        .table > thead > tr > th,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > td {
+            padding: 8px;
+            line-height: 1.428571429;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        .table > thead > tr > th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table > tbody + tbody {
+            border-top: 2px solid #ddd;
+        }
+
+        .table > tbody > tr:first-child > th,
+        .table > tbody > tr:first-child > td {
+            border-top: 0px;
+        }
+
+        /*设置表格背景条纹*/
+        .table-spriped > tbody > tr:nth-child(odd) > td,
+        .table-spriped > tbody > tr:nth-child(odd) > th {
+            background-color: #f9f9f9;
+        }
+
+        /*设置表格边框*/
+        .table-bordered {
+            border: 1px solid #dddddd;
+        }
+
+            .table-bordered > thead > tr > th,
+            .table-bordered > tbody > tr > th,
+            .table-bordered > tfoot > tr > th,
+            .table-bordered > thead > tr > td,
+            .table-bordered > tbody > tr > td,
+            .table-bordered > tfoot > tr > td {
+                border: 1px solid #dddddd;
+            }
+
+            .table-bordered > thead > tr > th,
+            .table-bordered > thead > tr > td {
+                border-bottom-width: 2px;
+            }
+
+        /*鼠标悬停效果*/
+        .table-hover > tbody > tr:hover > th,
+        .table-hover > tbody > tr:hover > td {
+            background-color: #f5f5f5;
+        }
+
+        @@media (max-width:767px) {
+            .table-responsive {
+                width: 100%;
+                margin-bottom: 15px;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;/*允许独立的滚动区域和触摸回弹*/
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+                border: 1px solid #ddd;
+            }
+
+            .table-responsive > .table {margin-bottom:0px;}
+            .table-responsive > .table > thead > tr > th,
+            .table-responsive > .table > tbody > tr > td,
+            .table-responsive > .table > tfoot > tr > td {
+                white-space:nowrap;
+            }
+
+            .table-responsive > .table-bordered {
+                border:0px;
+            }
+            .table-responsive > .table-bordered > tbody > tr > th:first-child,
+            .table-responsive > .table-bordered > tbody > tr > td:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+                border-left:0px;
+            }
+            .table-responsive > .table-bordered > tbody > tr > th:last-child,
+            .table-responsive > .table-bordered > tbody > tr > td:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+                border-right:0px;
+            }
+            .table-responsive > .table-bordered > tbody > tr:last-child > th,
+            .table-responsive > .table-bordered > tbody > tr:last-child > td,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+                border-bottom:0px;
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+    <div class="table-responsive">
+        <table class="table table-spriped table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>图书名称</th>
+                <th>出版社</th>
+                <th>作译者</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>JavaScript编程精解</td>
+                <td>机械工业出版社</td>
+                <td>汤姆大叔（译）</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>JavaScript设计模式</td>
+                <td>人民邮电出版社</td>
+                <td>汤姆大叔（译）</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>JavaScript启示录</td>
+                <td>人民邮电出版社</td>
+                <td>汤姆大叔（译）</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>深入理解BootStrap</td>
+                <td>机械工业出版社</td>
+                <td>汤姆大叔（译）</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>

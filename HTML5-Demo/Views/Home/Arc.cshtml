@@ -1,0 +1,593 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>圆形</title>
+    <link rel="shortcut icon" href="http://www.jiuxian.com/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="http://www.jiuxian.com/favicon.ico" type="image/x-icon" />
+    <script src="~/Content/JS/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        function ClickRemoveChangeCode() {
+            var code = $("#imgCode").attr("src");
+            $("#imgCode").attr("src", code + "1");
+        }
+
+        function draw0(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext('2d');
+            var n = 0;
+
+            //左侧1/4圆弧
+            //context.beginPath();
+            context.arc(100, 150, 50, 0, Math.PI / 2, false);
+            context.fillStyle = 'rgba(255,0,0,0.25)';
+            context.fill();
+            context.strokeStyle = 'rgba(255,0,0,0.25)'
+            context.closePath();
+            context.stroke();
+
+            //右侧1/4圆弧
+            //context.beginPath();
+            context.arc(300, 150, 50, 0, Math.PI / 2, false);
+            context.fillStyle = 'rgba(255,0,0,0.25)';
+            context.fill();
+            context.strokeStyle = 'rgba(255,0,0,0.25)';
+            context.closePath();
+            context.stroke();
+        }
+
+
+        var x = 100;//矩形开始坐标
+        var y = 100;//矩形结束坐标
+        var mx = 0;//0右1左
+        var my = 0; //0下1上
+        var ml = 1;//每次移动长度
+        var w = 20;//矩形宽度
+        var h = 20;//矩形高度
+        var cw = 400;//canvas宽度
+        var ch = 300; //canvas高度
+
+        function move(context) {
+            context.clearRect(0, 0, 400, 300);
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+            context.fillStyle = "red";
+            context.fillRect(x, y, w, h);
+            if (mx == 0) {
+                x = x + ml;
+                if (x >= cw - w) {
+                    mx = 1;
+                }
+            }
+            else {
+                x = x - ml;
+                if (x <= 0) {
+                    mx = 0;
+                }
+            }
+            if (my == 0) {
+                y = y + ml;
+                if (y >= ch - h) {
+                    my = 1;
+                }
+            }
+            else {
+                y = y - ml;
+                if (y <= 0) {
+                    my = 0;
+                }
+            }
+
+        }
+
+        function draw20(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+
+            var interal = setInterval(function () {
+                move(context);
+            }, 1);
+        }
+
+        var retX = 100;//移动矩形的X坐标
+        var retY = 100;//移动矩形的Y坐标
+        var retWidth = 20;
+        var retHeight = 20;
+        var moveX = 0;//0为向右移动，1为向左移动
+        var moveY = 0;//0为向下移动，1为向上移动
+        var movelen = 1;//每次移动长度
+        var canvasWidth = 400;
+        var canvasHeight = 300;
+
+        function jasonmove(context) {
+            context.clearRect(0, 0, 400, 300);//清除当前内容
+            context.fillStyle = "pink";
+            context.fillRect(0, 0, 400, 300);
+            context.fillStyle = "red";
+            context.fillRect(retX, retY, retWidth, retHeight);
+
+            if (moveX == 0) {
+                retX = retX + movelen;
+                if (retX >= canvasWidth - retWidth) {
+                    moveX = 1;
+                }
+            } else {
+                retX = retX - movelen;
+                if (retX <= 0) {
+                    moveX = 0;
+                }
+            }
+
+            if (moveY == 0) {
+                retY = retY + movelen;
+                if (retY >= canvasHeight - retHeight) {
+                    moveY = 1;
+                }
+            } else {
+                retY = retY - movelen;
+                if (retY <= 0) {
+                    moveY = 0;
+                }
+            }
+        }
+
+        function jasondraw20(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext('2d');
+
+            var interval = setInterval(function () { jasonmove(context) }, 1);
+        }
+
+
+        function draw19(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "rgb(0,0,225)";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "rgb(255,255,0)";
+            context.fillRect(10, 20, 50, 50);
+            //把图像保存到新的窗口
+            var w = window.open(canvas.toDataURL("image/jpeg"), "smallwin", "width=400,height=350");
+        }
+
+        function jasondraw19(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext('2d');
+            context.fillStyle = "rgb(0,0,255)";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "rgb(255,255,0)";
+            context.fillRect(0, 0, 50, 50);
+            var w = window.open(canvas.toDataURL("image/jepg", "smallwin", "width=400,height=350"));//打开新窗口
+        }
+
+
+        function draw18(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "red";
+            context.save(); //保存了当前context的状态
+            context.fillStyle = "black";
+            context.fillRect(0, 0, 100, 100);
+            context.restore();//恢复到刚刚保存的状态
+            context.fillRect(0, 120, 100, 100);
+        }
+
+        function jasondraw18(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext('2d');
+            context.fillStyle = "red";
+            context.save();
+            context.fillStyle = "pink";
+            context.save();
+            context.fillStyle = "black";
+            context.fillRect(0, 0, 100, 100);
+            context.restore();
+            context.fillRect(0, 120, 100, 100);
+        }
+
+
+        function draw17(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+            context.fillStyle = "#00f";
+            context.font = "italic 30px sans-serif";
+            context.textBaseline = 'top';
+            //填充字符串
+            var txt = "fill示例文字"
+            context.fillText(txt, 0, 0);
+            var length = context.measureText(txt);
+            context.fillText("长" + length.width + "px", 0, 50);
+            context.font = "bolid 30px sans-serif";
+            txt = "stroke示例文字";
+            length = context.measureText(txt);
+            context.strokeText(txt, 0, 100);
+            context.fillText("长" + length.width + "px", 0, 150);
+        }
+
+        function jasondraw17(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext('2d');
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+            context.font = "italic 30px sans-serif";//设置字体样式
+            context.textBaseline = "top";//字体垂直对齐方式
+            context.fillStyle = "#00f";
+            var txt = "fill示例文字";
+            context.fillText(txt, 0, 0);
+            var length = context.measureText(txt);
+            context.fillText("长" + length.width + "px", 0, 100);
+
+            txt = "stroke示例文字";
+            length = context.measureText(txt);
+            context.strokeText(txt, 0, 150);
+
+            //context.textAlign = "start";
+            context.fillText("长" + length.width + "px", 0, 200);
+
+
+            /*//字体垂直对齐方式
+            var bases = ['top', 'handing', 'middle', 'alphabetic', 'ideographic', 'bottom'];            
+            var i = 0;
+            var interval = setInterval(function () {
+                if (i ==5) {
+                    i = 0;
+                } else { i++;}
+
+                context.clearRect(0, 0, 400, 300);
+                context.fillStyle = "#EEEEFF";
+                context.fillRect(0, 0, 400, 300);
+                context.fillStyle = "#00f";
+                context.font = "italic 30px sans-serif";//设置字体样式
+                context.textBaseline = bases[i];
+                var txt = "fill示例文字";
+                context.fillText(txt, 100, 100);
+            }, 1000);*/
+
+            /*//字体水平对齐方式
+            var aligns = ['start', 'end', 'right', 'center'];
+            var i = 0;
+            var interval = setInterval(function () {
+                if (i == 3) {
+                    i = 0;
+                } else { i++; }
+
+                context.clearRect(0, 0, 400, 300);
+                context.fillStyle = "#EEEEFF";
+                context.fillRect(0, 0, 400, 300);
+                context.fillStyle = "#00f";
+                context.font = "italic 30px sans-serif";//设置字体样式
+                context.textAlign = aligns[i];
+                var txt = "fill示例文字";
+                context.fillText(txt, 100, 100);
+            }, 1000);*/
+        }
+
+
+        function draw16(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = 'red'
+            //在右下角画一个正方形
+            context.fillRect(250, 250, 150, 50);
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+
+            image.onload = function () {
+                //在左上角画一幅图片
+                context.drawImage(image, 0, 0, 200, 200);
+
+                //实验证明imagedata取的是canvas所在范围画的图形，不止是图片
+                //不会取该区域内是空白的canvas的像素
+                var imagedata = context.getImageData(0, 0, 400, 300);
+
+                //修改imagedata
+                for (var i = 0, n = imagedata.data.length; i < n; i += 4) {
+
+                    imagedata.data[i + 0] = 255 - imagedata.data[i + 0]; //red;
+                    imagedata.data[i + 1] = 255 - imagedata.data[i + 1]; //green
+                    imagedata.data[i + 2] = 255 - imagedata.data[i + 2]; //blue
+                    //imagedata.data[i + 3] = 255 - imagedata.data[i + 3]; //透明度
+                }
+                context.putImageData(imagedata, 100, 100, 100, 100, 100, 100);
+            }
+        }
+
+        function jasondraw160(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext('2d');
+            context.fillStyle = "red";
+            //先画一个矩形，待渲染
+            context.fillRect(150, 150, 100, 100);
+
+            //得到每个像素点的rgba，[r1,g1,b1,a1,r2,g2,b2...]
+            var imagedata = context.getImageData(150, 150, 100, 100);//相当于画一个矩形，拿到矩形内的所有像素
+            //循环每个像素，改变其rgba
+            for (var i = 0, n = imagedata.data.length; i <= n; i += 4) {
+                imagedata.data[i + 0] = 255 - imagedata.data[i + 0];//r
+                imagedata.data[i + 1] = 255 - imagedata.data[i + 1];//g
+                imagedata.data[i + 2] = 255 - imagedata.data[i + 2];//b
+                //imagedata.data[i + 3] = 1 - imagedata.data[i + 3];//a：透明度
+            }
+
+            /*重绘方法参数：像素颜色数组，重绘X坐标(相对于canvas原点)，重绘Y坐标（相对于canvas原点），
+            相对矩形（像素矩形）左上角的X坐标，相对矩形（像素矩形）左上角的Y坐标，要绘制的长度，要绘制的高度。
+            */
+            context.putImageData(imagedata, 100, 100, 0, 0, 200, 200);
+        }
+
+        function jasondraw161(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            context.fillStyle = 'red';
+            context.fillRect(200, 200, 50, 50);
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+
+            image.onload = function () {
+                context.drawImage(image, 0, 0, 200, 200);
+
+                //获取矩形内所有像素点，除该区域内空白的canvas像素
+                var imagedata = context.getImageData(0, 0, 400, 300);
+                /*设置every像素点的颜色*/
+                for (var i = 0, n = imagedata.data.length; i < n; i += 4) {
+                    imagedata.data[i] = 255 - imagedata.data[i];
+                    imagedata.data[i + 1] = 255 - imagedata.data[i + 1];
+                    imagedata.data[i + 2] = 100 - imagedata.data[i + 2];
+                    //imagedata.data[i + 3] = 1 - imagedata.data[i + 3];//透明度
+                }
+
+                context.putImageData(imagedata, 0, 0);
+            };
+        }
+
+
+        /*在相对于canvas左上角的X，Y的坐标位置绘制图片*/
+        function draw28(id) {            
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+           
+            var context = canvas.getContext("2d");
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+            context.fillStyle = "#EEEEFF";
+
+            context.fillRect(0, 0, 400, 300);
+            image.onload = function () {
+                context.drawImage(image, 0, 0);
+            }
+        }
+        function jasondraw28(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+            { return false; }
+            var context = canvas.getContext('2d');
+
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+
+            image.onload = function () {
+                context.drawImage(image, 0, 0);
+            }
+        }
+
+        /*在相对于canvas左上角的X，Y的坐标位置绘制指定长宽的图片*/
+        function draw12(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+
+            var context = canvas.getContext("2d");
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+            context.fillStyle = "#EEEEFF";
+
+            context.fillRect(0, 0, 400, 300);
+            image.onload = function () {
+                context.drawImage(image, 50, 50, 200, 200);
+            }
+        }
+        function jasondraw12(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext('2d');
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+            image.onload = function () {
+                context.drawImage(image, 0, 0, 300, 200);//宽高缩放
+            }
+        }
+
+        /*参数解析：图片对象，在图片上截取的X坐标（相对于图片左上角），在图片上截取的Y坐标（相对于图片左上角），
+        在图片上截取矩形的长度，在图片上截取矩形的高度，绘制图片的X坐标（相对canvas左上角），绘制图片得Y坐标（相对于canvas左上角）
+        截取之后矩形中的图片长度（缩放），截取之后矩形中的图片高度（缩放）*/
+        function draw13(id) {
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+            var canvas = document.getElementById(id);
+
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "#EEEEFF";
+
+            context.fillRect(0, 0, 400, 300);
+            image.onload = function () {
+                context.drawImage(image, 100, 100, 100, 200, 50, 50, 300, 200);
+            }
+        }
+        function jasondraw13(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+
+            var context = canvas.getContext('2d');
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+
+            var image = new Image();
+            image.src = "../Content/Image/html5.jpg";
+            image.onload = function () {
+                context.drawImage(image, 0, 0, 512, 512, 50, 50, 200, 200);
+            }
+        }
+
+        /*shadowOffsetX：阴影的横向位移量（默认为0），shadowOffsetY：阴影的纵向位移量（默认为0），
+        shadowColor：阴影颜色，shadowBlur：阴影的模糊度（值越大越模糊）*/
+        function draw27(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            context.shadowOffsetX = 10;
+            context.shadowOffsetY = 10;
+            context.shadowColor = 'rgba(100,100,100,0.5)';
+            context.shadowBlur = 1.5;
+            context.fillStyle = 'rgba(255,0,0,0.5)';
+            context.fillRect(100, 100, 200, 100);
+        }
+        function jasondraw27(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext('2d');
+            context.shadowOffsetX = 20;
+            context.shadowOffsetY = 20;
+            context.shadowColor = "rgba(100,100,100,0.5)";
+            context.shadowBlur = 1.5;
+            context.fillStyle = "rgba(255,0,0,0.5)";
+            context.fillRect(100, 100, 200, 100);
+        }
+
+
+        function create5Star(context) {
+            var dx = 100;
+            var dy = 0;
+
+            var s = 50;
+            //创建路径
+            context.beginPath();
+            context.fillStyle = 'rgba(255,0,0,0.5)';
+            //var x = Math.sin(0);
+            //var y = Math.cos(0);
+            var dig = Math.PI / 5 * 4;
+            for (var i = 0; i < 5; i++) {
+                var x = Math.sin(i * dig);
+                var y = Math.cos(i * dig);
+                context.lineTo(dx + x * s, dy + y * s);
+            }
+            context.closePath();
+        }
+        function draw11(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null)
+                return false;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "#EEEEFF";
+            context.fillRect(0, 0, 400, 300);
+
+            context.shadowOffsetX = 10;
+            context.shadowOffsetY = 10;
+            context.shadowColor = 'rgba(100,100,100,0.5)';
+            context.shadowBlur = 5;
+            //图形绘制
+            context.translate(0, 50);
+            for (var i = 0; i < 3; i++) {
+                context.translate(50, 50);
+                create5Star(context);
+                context.fill();
+            }
+        }
+
+
+        function jason5Star(id) {
+            var canvas = document.getElementById(id);
+            if (canvas == null) {
+                return false;
+            }
+            var context = canvas.getContext('2d');
+            context.beginPath();
+            context.moveTo(130.90169943749473, 195.10565162951536);
+            context.lineTo(50, 136.32712640026804);
+            context.lineTo(150, 136.32712640026804);
+            context.lineTo(69.09830056250526, 195.10565162951536);
+            context.lineTo(100, 100);
+            context.closePath();
+
+            context.strokeStyle = 'pink';
+            context.stroke();
+        }
+
+    </script>
+</head>
+<body>
+    <img src="/Home/CheckCode?ID=1" id="imgCode" alt="单击可刷新" onclick="ClickRemoveChangeCode()" />
+    <div style="float: right; margin-top: 5px;">
+        <a href="javascript:void(0)" onclick="ClickRemoveChangeCode();return false;">看不清，换一张</a>
+    </div>
+    <div style="height: 100px;"></div>
+
+    <canvas id="demo1" width="500" height="300"></canvas>
+    <canvas id="demo2" width="400" height="300"></canvas>
+    <canvas id="demo3" width="400" height="300"></canvas>
+    <canvas id="demo4" width="400" height="300"></canvas>
+    <canvas id="demo5" width="400" height="300"></canvas>
+    <canvas id="demo6" width="400" height="300"></canvas>
+    <canvas id="demo7" width="400" height="300"></canvas>
+    <canvas id="demo8" width="400" height="300"></canvas>
+    <canvas id="demo9" width="400" height="300"></canvas>
+    <canvas id="demo10" width="600" height="600"></canvas>
+
+    <div style="height: 100px;"></div>
+    <input type="button" value="圆形" onclick="draw0('demo1');" />
+    <input type="button" value="我弹" onclick="jasondraw20('demo2');" />
+    <input type="button" value="保存图片" onclick="draw19('demo3');" />
+    <input type="button" value="状态保存恢复" onclick="jasondraw18('demo4');" />
+    <input type="button" value="绘制文字" onclick="jasondraw17('demo5');" />
+    <input type="button" value="像素处理" onclick="jasondraw161('demo6');" />
+    <input type="button" value="绘制图片" onclick="jasondraw13('demo7');" />
+    <input type="button" value="绘制阴影" onclick="jasondraw27('demo8');" />
+    <input type="button" value="绘制五角星阴影" onclick="draw11('demo9');" />
+    <input type="button" value="自制五角星" onclick="jason5Star('demo10');" />
+</body>
+</html>
